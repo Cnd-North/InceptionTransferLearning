@@ -41,3 +41,41 @@ model.compile(optimizer = RMSprop(lr=0.0001),
             metrics = ['acc'])
 
         
+
+
+# Add our data-augmentation parameters to ImageDataGenerator
+train_datagen = ImageDataGenerator(rescale = 1./255.,
+                rotation_range = 40,
+                width_shift_range = 0.2,
+                height_shift_range = 0.2,
+                shear_range = 0.2,
+                zoom_range = 0.2,
+                horizontal_flip = True)
+
+# Note that the validation data should not be augmented!
+test_datagen = ImageDataGenerator(resale = 1.0/255.)
+
+# Flow training images in batches of 20 using train_datagen generator
+train_generator = train_datagen.flow_from_directory(train_dir,
+                                                    batch_size = 20,
+                                                    class_mode = 'binary',
+                                                    target_size = (150,150))
+
+# Flow validation images in batches of 20 using test_datagen generator
+validation_generator = test_datagen.flow_from_directory(validation_dir,
+                                                        batch_size = 20,
+                                                        class_mode = 'binary',
+                                                        target_size = (150,150))
+
+# For 2000 training images (batches of 20) and 1000 validation images (batches of 20)
+
+callbacks = myCallback()
+history = model.fit_generator(
+            train_generator,
+            validation_data = validation_generator,
+            steps_per_epoch = 100,
+            epochs = 100,
+            validation_steps = 50,
+            verbose = 2,
+            callbacks=[callbacks]
+)
