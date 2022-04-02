@@ -6,7 +6,7 @@
 
 # Import that inception model
 from re import X
-from tensorflow.keras.application.inception_v3 import InceptionV3
+from tensorflow.keras.applications.inception_v3 import InceptionV3
 
 pre_trained_model = InceptionV3(input_shape = (150, 150, 3),   # Shape of the images
                 include_top = False,    # Leave out the last fully connected layer, specific for ImageNet
