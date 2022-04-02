@@ -56,7 +56,7 @@ train_datagen = ImageDataGenerator(rescale = 1./255.,
                 horizontal_flip = True)
 
 # Note that the validation data should not be augmented!
-test_datagen = ImageDataGenerator(resale = 1.0/255.)
+test_datagen = ImageDataGenerator(rescale = 1.0/255.)
 
 # Flow training images in batches of 20 using train_datagen generator
 train_generator = train_datagen.flow_from_directory(train_dir,
