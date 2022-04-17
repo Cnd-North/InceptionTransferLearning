@@ -5,5 +5,6 @@
 
 # current ~42,000 images were generated & 20% (8400) will be used for validation
 
+# For gshuf: brew install coreutils
 ls | gshuf -n 8400 | xargs -I mv {} path-to-new-folder
 
